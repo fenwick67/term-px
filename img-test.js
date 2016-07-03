@@ -4,6 +4,8 @@ var bmp = require('bmp-js');
 var fs = require('fs');
 var rgbPairToChar = require('./index.js');
 var ansiEscapes = require('ansi-escapes');
+var cache = {};
+
 
 setInterval(alternate,1000)
 alternate();
@@ -17,14 +19,21 @@ function alternate(){
 }
 
 
-
 /* console.log(dat.length);
 console.log(dat); */
 
 function printImage(filename){
+  var bmpData;
+  if (cache[filename]){
+    bmpData = cache[filename]
+  }else{
+    var bmpBuffer = fs.readFileSync(filename);
+    var bmpData = bmp.decode(bmpBuffer);
+    cache[filename] = bmpData;
+  }
   
-  var bmpBuffer = fs.readFileSync(filename);
-  var bmpData = bmp.decode(bmpBuffer);
+  
+ 
   var dat = bmpData.data;
 
   process.stdout.write(ansiEscapes.cursorUp(bmpData.height / 2));
