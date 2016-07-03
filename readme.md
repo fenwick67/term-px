@@ -1,6 +1,6 @@
 # term-px
 
-Write pixels to the terminal using only ANSI characters.
+Write pixels to the terminal using ANSI colors and half-characters.
 
 ![Demo](http://i.imgur.com/iwlN1Ru.gif)
 
