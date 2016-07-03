@@ -1,6 +1,6 @@
 {
   "name": "term-px",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Write pixels to the terminal in vertical pairs",
   "main": "index.js",
   "scripts": {

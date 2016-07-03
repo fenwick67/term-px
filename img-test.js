@@ -59,3 +59,22 @@ function printImage(filename){
   
 }
 
+
+
+var colorMatx = 
+[//    dark         bright
+  [[000,000,000],[058,058,058]],// black
+  [[178,000,000],[247,048,058]],// red
+  [[050,184,026],[089,255,068]],// green
+  [[185,183,026],[255,253,067]],// yellow
+  [[000,021,182],[085,091,253]],// blue
+  [[177,000,182],[246,055,253]],// magenta
+  [[047,186,184],[086,255,255]],// cyan
+  [[184,184,184],[255,255,255]] // white
+]
+
+colorMatx.forEach(function(row){
+  process.stdout.write(rgbPairToChar(row[0],row[1]));
+});
+
+

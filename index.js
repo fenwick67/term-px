@@ -16,6 +16,8 @@ module.exports = function rgbToCodes(top,bottom){
   var topColor = findColor(top);
   var bottomBg = findBg(bottom)
     
+    
+  //same color top and bottom... save some space
   if (top[0] == bottom[0] && top[1] == bottom[1] && top[2] == bottom[2]){
     if (topColor == '30' ){//if it's black
       return esc + '[0m ';// black bg plus space
