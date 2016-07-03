@@ -1,18 +1,39 @@
 {
-  "name": "term-img",
-  "version": "1.0.0",
-  "description": "",
+  "name": "term-px",
+  "version": "0.0.1",
+  "description": "Write pixels to the terminal in vertical pairs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node img-test.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Drew Harwell",
+  "license": "MIT",
   "dependencies": {
     "lodash": "^4.13.1"
   },
   "devDependencies": {
+    "ansi-escapes": "^1.4.0",
     "bmp-js": "0.0.1",
     "lodash": "^4.13.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fenwick67/term-px.git"
+  },
+  "keywords": [
+    "terminal",
+    "pixels",
+    "image",
+    "px",
+    "term",
+    "ansi",
+    "colors",
+    "gif",
+    "image",
+    "display"
+  ],
+  "bugs": {
+    "url": "https://github.com/fenwick67/term-px/issues"
+  },
+  "homepage": "https://github.com/fenwick67/term-px#readme"
 }

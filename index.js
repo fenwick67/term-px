@@ -15,18 +15,23 @@ module.exports = function rgbToCodes(top,bottom){
   
   var topColor = findColor(top);
   var bottomBg = findBg(bottom)
-  
-  
     
   if (top[0] == bottom[0] && top[1] == bottom[1] && top[2] == bottom[2]){
-    if (findColor(top) == '30' ){//if it's black
+    if (topColor == '30' ){//if it's black
       return esc + '[0m ';// black bg plus space
     }  
     return esc + '[' + topColor + 'm'+fullChar;
   }
   else{
-    //use topChar every time
-    //console.log( '[' + findColor(top) + ';' + findBg(bottom) + 'm' + topChar);
+    //use topChar usually
+    
+    //if top = black, or bottom = white, use bottomChar and invert
+    if (topColor == '30' || bottomBg == '47;5'){
+      var bottomColor = findColor(bottom);
+      var topBg = findBg(top);
+      
+      return esc + '[' + bottomColor + ';' + topBg + 'm' + bottomChar + esc + '[0m';      
+    }
     
 
     return esc + '[' + topColor + ';' + bottomBg + 'm' + topChar + esc + '[0m';
@@ -40,15 +45,15 @@ module.exports = function rgbToCodes(top,bottom){
 var styles = ['black','red','green','yellow','blue','magenta','cyan','white'];
 
 var RGBs =
-[
-  [[000,000,000],[085,085,085]],//blacks
-  [[205,000,000],[255,000,000]],//reds
-  [[000,205,000],[000,255,000]],//greens
-  [[205,205,000],[255,255,000]],//yellows
-  [[000,000,205],[000,000,255]],//blues
-  [[205,000,205],[255,000,255]],//magentas
-  [[000,205,205],[000,255,255]],//cyans
-  [[205,205,205],[255,255,255]]//whites
+[//    dark         bright
+  [[000,000,000],[085,085,085]],// black
+  [[205,000,000],[255,000,000]],// red
+  [[000,205,000],[000,255,000]],// green
+  [[205,205,000],[255,255,000]],// yellow
+  [[000,000,205],[000,000,255]],// blue
+  [[205,000,205],[255,000,255]],// magenta
+  [[000,205,205],[000,255,255]],// cyan
+  [[205,205,205],[255,255,255]] // white
 ]
 
 
