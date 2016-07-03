@@ -9,13 +9,14 @@ var cache = {};
 
 setInterval(alternate,1000)
 alternate();
-var i = 0;
+var i = 1;
 function alternate(){
+  
   i++;
-  if (i%2){
+  if (i%2==0){
     return printImage('test.bmp');
   }
-  printImage('test2.bmp');  
+  printImage('test2.bmp');
 }
 
 
@@ -33,7 +34,7 @@ function printImage(filename){
   }
   
   
- 
+ //console.log(bmpData.width)
   var dat = bmpData.data;
 
   process.stdout.write(ansiEscapes.cursorUp(bmpData.height / 2));
@@ -50,9 +51,9 @@ function printImage(filename){
     process.stdout.write(rgbPairToChar(top,bottom));
     
     i = i + 4;
-    if (i % bmpData.width == 0 ){
+    if ( (i/4) % bmpData.width == 0 ){
       process.stdout.write('\n');
-      i = i + bmpData.width*4;//skip
+      i = i + bmpData.width*4;//skip line
     }
   } 
   

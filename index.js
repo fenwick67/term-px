@@ -20,10 +20,11 @@ module.exports = function rgbToCodes(top,bottom){
     if (topColor == '30' ){//if it's black
       return esc + '[0m ';// black bg plus space
     }  
-    return esc + '[' + topColor + 'm'+fullChar;
+    return esc + '[' + topColor + 'm'+fullChar + esc + '[0m';
   }
   else{
     //use topChar usually
+    
     
     //if top = black, or bottom = white, use bottomChar and invert
     if (topColor == '30' || bottomBg == '47;5'){
@@ -44,16 +45,17 @@ module.exports = function rgbToCodes(top,bottom){
 //for reference only
 var styles = ['black','red','green','yellow','blue','magenta','cyan','white'];
 
+// TODO: some terminals have different color grays for background and text.
 var RGBs =
 [//    dark         bright
-  [[000,000,000],[085,085,085]],// black
-  [[205,000,000],[255,000,000]],// red
-  [[000,205,000],[000,255,000]],// green
-  [[205,205,000],[255,255,000]],// yellow
-  [[000,000,205],[000,000,255]],// blue
-  [[205,000,205],[255,000,255]],// magenta
-  [[000,205,205],[000,255,255]],// cyan
-  [[205,205,205],[255,255,255]] // white
+  [[000,000,000],[058,058,058]],// black
+  [[178,000,000],[247,048,058]],// red
+  [[050,184,026],[089,255,068]],// green
+  [[185,183,026],[255,253,067]],// yellow
+  [[000,021,182],[085,091,253]],// blue
+  [[177,000,182],[246,055,253]],// magenta
+  [[047,186,184],[086,255,255]],// cyan
+  [[184,184,184],[255,255,255]] // white
 ]
 
 
