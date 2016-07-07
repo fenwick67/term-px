@@ -22,7 +22,7 @@ module.exports = function rgbToCodes(top,bottom){
     if (topColor == '30' ){//if it's black
       return esc + '[0m ';// black bg plus space
     }  
-    return esc + '[' + topColor + 'm'+fullChar + esc + '[0m';
+    return esc + '[' + topColor + 'm'+fullChar + reset;
   }
   else{
     //use topChar usually
@@ -33,11 +33,11 @@ module.exports = function rgbToCodes(top,bottom){
       var bottomColor = findColor(bottom);
       var topBg = findBg(top);
       
-      return esc + '[' + bottomColor + ';' + topBg + 'm' + bottomChar + esc + '[0m';      
+      return esc + '[' + bottomColor + ';' + topBg + 'm' + bottomChar + reset;      
     }
     
 
-    return esc + '[' + topColor + ';' + bottomBg + 'm' + topChar + esc + '[0m';
+    return esc + '[' + topColor + ';' + bottomBg + 'm' + topChar + reset;
   }  
 }
 
@@ -76,14 +76,14 @@ var bgs = {};
 var colorIndexes = [];
 
 RGBs.forEach(function(rgbPair,index){
-  var color = (index + 30) + '';
-  var bg = (index + 40) + '';
+  var color = index + 30;
+  var bg = index + 40;
   
   colors[color] = rgbPair[0];
   bgs[bg] = rgbPair[0];
   
-  var colorBright = color + ';1';
-  var bgBright = bg + ';5';// blink is bright right?
+  var colorBright = index+ 90;
+  var bgBright = index + 100;
   
   colors[colorBright] = rgbPair[1];
   bgs[bgBright] = rgbPair[1];
@@ -101,6 +101,10 @@ function findBg(rgb){
   
   _.each(bgs,function(color,ansi){
     var dist = rgbDistance(color,rgb);
+    if (dist < 5){// executive decision: within a distance of 5 units is basically spot-on
+      closest = ansi;
+      return false;// break early
+    }
     if (dist < closestDist){
       closestDist = dist;
       closest = ansi
