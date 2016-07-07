@@ -8,7 +8,7 @@ var cache = {};
 
 
 setInterval(alternate,1000)
-alternate();
+
 var i = 1;
 function alternate(){
   
@@ -59,7 +59,9 @@ function printImage(filename){
   
 }
 
+//printing starts here
 
+alternate();
 
 var colorMatx = 
 [//    dark         bright
