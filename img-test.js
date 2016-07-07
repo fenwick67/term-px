@@ -37,7 +37,7 @@ function printImage(filename){
  //console.log(bmpData.width)
   var dat = bmpData.data;
 
-  process.stdout.write(ansiEscapes.cursorUp(bmpData.height / 2));
+  process.stdout.write(ansiEscapes.cursorUp(1+ bmpData.height / 2));
 
   var i = 0;
   while (i < dat.length){
@@ -65,18 +65,24 @@ alternate();
 
 var colorMatx = 
 [//    dark         bright
-  [[000,000,000],[058,058,058]],// black
-  [[178,000,000],[247,048,058]],// red
-  [[050,184,026],[089,255,068]],// green
-  [[185,183,026],[255,253,067]],// yellow
-  [[000,021,182],[085,091,253]],// blue
-  [[177,000,182],[246,055,253]],// magenta
-  [[047,186,184],[086,255,255]],// cyan
+  [[  0,  0,  0],[ 58, 58, 58]],// black
+  [[178,  0,  0],[247, 48, 58]],// red
+  [[ 50,184, 26],[ 89,255, 68]],// green
+  [[185,183, 26],[255,253, 67]],// yellow
+  [[  0, 21,182],[ 85, 91,253]],// blue
+  [[177,  0,182],[246,055,253]],// magenta
+  [[ 47,186,184],[ 86,255,255]],// cyan
   [[184,184,184],[255,255,255]] // white
 ]
+
 
 colorMatx.forEach(function(row){
   process.stdout.write(rgbPairToChar(row[0],row[1]));
 });
 
+process.stdout.write('\n');
+
+colorMatx.forEach(function(row){
+  process.stdout.write(rgbPairToChar(row[1],row[0]));
+});
 
