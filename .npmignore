@@ -1,0 +1,4 @@
+*.bmp
+node_modules
+.git
+*est.js

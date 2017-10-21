@@ -6,22 +6,24 @@ var rgbPairToChar = require('./index.js');
 var ansiEscapes = require('ansi-escapes');
 var cache = {};
 
+for (var i = 0; i < 25; i ++){
+  process.stdout.write('\r\n');
+}
 
-setInterval(alternate,1000)
+setInterval(alternate,100)
 
 var i = 1;
 function alternate(){
-  
+
   i++;
   if (i%2==0){
-    return printImage('test.bmp');
+     printImage('test.bmp');
+     return;
   }
   printImage('test2.bmp');
+  return;
 }
 
-
-/* console.log(dat.length);
-console.log(dat); */
 
 function printImage(filename){
   var bmpData;
@@ -32,38 +34,17 @@ function printImage(filename){
     var bmpData = bmp.decode(bmpBuffer);
     cache[filename] = bmpData;
   }
-  
-  
- //console.log(bmpData.width)
-  var dat = bmpData.data;
 
-  process.stdout.write(ansiEscapes.cursorUp(1+ bmpData.height / 2));
+  process.stdout.write(ansiEscapes.cursorUp( bmpData.height / 2));
 
-  var i = 0;
-  while (i < dat.length){
-    
-    // each row
-    
-    //it's RGBA
-    var top = [dat[i],dat[i+1],dat[i+2]];
-    var bottom = [dat[i + bmpData.width*4 ],dat[i + bmpData.width*4+1],dat[i + bmpData.width*4+2]];
-    
-    process.stdout.write(rgbPairToChar(top,bottom));
-    
-    i = i + 4;
-    if ( (i/4) % bmpData.width == 0 ){
-      process.stdout.write('\n');
-      i = i + bmpData.width*4;//skip line
-    }
-  } 
-  
+  var img = rgbPairToChar.convertImage(bmpData);
+  process.stdout.write(img);
+
 }
 
 //printing starts here
 
-alternate();
-
-var colorMatx = 
+var colorMatx =
 [//    dark         bright
   [[  0,  0,  0],[ 58, 58, 58]],// black
   [[178,  0,  0],[247, 48, 58]],// red
@@ -78,11 +59,15 @@ var colorMatx =
 
 colorMatx.forEach(function(row){
   process.stdout.write(rgbPairToChar(row[0],row[1]));
+  process.stdout.write(rgbPairToChar.reset);
 });
 
-process.stdout.write('\n');
+process.stdout.write('\r\n');
 
 colorMatx.forEach(function(row){
   process.stdout.write(rgbPairToChar(row[1],row[0]));
 });
 
+process.stdout.write(ansiEscapes.cursorUp(2));
+
+alternate();

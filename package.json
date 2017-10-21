@@ -1,16 +1,11 @@
 {
   "name": "term-px",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Write pixels to the terminal in vertical pairs",
   "main": "index.js",
-  "scripts": {
-    "test": "node img-test.js"
-  },
   "author": "Drew Harwell",
   "license": "MIT",
-  "dependencies": {
-    "lodash": "^4.13.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "ansi-escapes": "^1.4.0",
     "bmp-js": "0.0.1",
