@@ -19,7 +19,7 @@ function printImage(filename){
     cache[filename] = bmpData;
   }
 
-  var img = rgbPairToChar.convertImage(bmpData,{format:'rgb'});
+  var img = rgbPairToChar.convertImage(bmpData,{format:'rgb',reset:'line'});
   process.stdout.write(img);
 
 }

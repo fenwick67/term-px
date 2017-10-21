@@ -37,7 +37,7 @@ function printImage(filename){
 
   process.stdout.write(ansiEscapes.cursorUp( bmpData.height / 2));
 
-  var img = rgbPairToChar.convertImage(bmpData);
+  var img = rgbPairToChar.convertImage(bmpData,{reset:'line'});
   process.stdout.write(img);
 
 }

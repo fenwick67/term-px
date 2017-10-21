@@ -188,6 +188,10 @@ function objEach(o,func){
   }
 }
 
+function getPrintingCharacters(str){
+  return str.replace(/[\033m;\d\\\[]/g,'');
+}
+
 // other exports
 module.exports.reset = reset;
 
@@ -208,6 +212,7 @@ module.exports.convertImage = function convertImage(image,options){
   var dat = image.data;
 
   var i = 0;
+  var lastChar = false;
   while (i < dat.length){
 
    // each row
@@ -222,18 +227,28 @@ module.exports.convertImage = function convertImage(image,options){
      bottom = [0,0,0];
    }
 
-   ret += rgbToCodes(top,bottom,{
+   var thisChar = rgbToCodes(top,bottom,{
      reset:(doReset === true || doReset == 'all'),
      format:format
-   });
+   });   
+   
+   // check for previous == this, which means don't reuse reset char, just use the printing character
+   if ( doReset !== true && doReset != 'all' && lastChar == thisChar){
+     ret += getPrintingCharacters(thisChar);
+   }else{
+     ret += thisChar;
+   }
+   
+   lastChar = thisChar;    
 
    i = i + 4;
    if ( (i/4) % image.width == 0 ){
-     ret += '\n';
      if (doReset == 'line'){
        ret += reset;
      }
+     ret += '\n';
      i = i + image.width*4;//skip line
+     lastChar = false;// reset last char
    }
   }
 
