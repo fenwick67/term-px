@@ -1,0 +1,20 @@
+.xterm-rows > div{
+  height:16px !important;
+}
+#terminal,.terminal,.xterm-viewport,.xterm-rows{
+  height:320px !important;
+}
+html,body{
+  min-height:100% !important;
+}
+.pixelated{  
+  image-rendering:-ms-interpolation-mode: nearest-neighbor;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: pixelated;
+}
+.input.is-narrow{
+  max-width:5em !important;
+}
+canvas{
+  background:black;
+}

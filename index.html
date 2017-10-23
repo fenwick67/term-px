@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>image to ANSI tool</title>
+  <link rel='stylesheet prefetch' href='css/bulma.min.css'>
+  <link rel='stylesheet prefetch' href='https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css'>
+  <link rel='stylesheet prefetch' href='css/xterm.min.css'>
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+  <section class="hero is-success">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">Image to ANSI art</h1>
+        <h2 class="subtitle">Upload a file to get ANSI art for the terminal.</h2>
+        <p>Made possible with <a class="has-text-warning has-text-weight-bold" href="https://github.com/fenwick67/term-px">term-px</a></p>
+      </div>
+    </div>
+  </section>
+  <div class="section">
+    <div class="container">
+
+      <section id="dropzone">
+        <div class="field">
+          <div class="file is-warning is-boxed is-medium">
+            <label class="file-label">
+              <input class="file-input" type="file" id="fi">
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fa fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Choose a file…
+                </span>
+              </span>
+            </label>
+          </div>
+          <p class="help">Try something colorful like <code>https://upload.wikimedia.org/wikipedia/en/thumb/3/39/YoshiMarioParty9.png/175px-YoshiMarioParty9.png</code></p>
+
+        </div>
+        <div class="field">
+          <label class="label" >Mode</label>
+          <div class="select">
+            <select class="input" id="dither-alg">
+              <option value="rgb">RGB</option>
+              <option value="none">ansi colors</option>
+              <option value="ordered">ansi colors, ordered dithering</option>
+              <option value="diffusion">ansi colors, diffusion dithering</option>
+              <option value="atkinson">ansi colors, atkinson dithering</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <label class="label">Size reduction (1/scale):</label>
+            <input type="number" value="8" id="sc" class="input is-narrow"></input>
+            <span id="size" class="help"></span>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <label class="label">Image smoothing
+              <input type="checkbox" checked value="8" id="smoothing"  class="checkbox"></input></label>
+              <span id="size" class="help"></span>
+            </div>
+          </div>
+        </section>
+
+        <hr>
+        <p class="label">RGB:</p>
+        <canvas id="canv" width="1" height="1"></canvas>
+        <p class="label">Terminal Preview:</p>
+        <p class="help">Note: this terminal can't show <i>all</i> colors, but most (xterm, cmd, Git Bash) will.</p>
+        <div id="terminal"></div>
+
+      </section>
+
+      <hr>
+    </div>
+    <div class="container">
+
+      <label class="label"> UTF8 result (works with <code>cat</code>):
+        <p class="help">Copy, then <code>cat /dev/clipboard</code> in a terminal to test</p>
+      </label>
+      <textarea class="textarea" id="ta"></textarea>
+      <label class="label">Escaped String (works with <code>echo -e</code> and most languages):
+        <input type="text" class="input" id="jsresult">
+      </label>
+    </div>
+    <br>
+    <div class="container">
+      <p>For best results with ANSI colors, use this palette in source images:</p>
+      <img class="pixelated" src="data:image/bmp;base64,Qk2qAAAAAAAAAHoAAABsAAAACAAAAAIAAAABABgAAAAAADAAAAATCwAAEwsAAAAAAAAAAAAAQkdScwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAC4uLg6MPdD/f9E/1n//1b9W1X9N/Y6Ojr///8AALIat7kauDK4ui+2FQC2ALEAAAA=" width="160"></img>
+    </div>
+  </div>
+  <p class="has-text-centered is-small">
+    © Drew Harwell
+  </p>
+  <script src='js/term-px.js'></script>
+  <script src='js/ditherjs.dist.js'></script>
+  <script src='js/xterm.js'></script>
+  <script  src="js/index.js"></script>
+
+</body>
+</html>
