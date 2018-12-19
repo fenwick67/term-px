@@ -27,7 +27,7 @@ function rgbToCodes(top,bottom,options){
   var bottomBg = findBg(bottom);
 
   //same color top and bottom... save some space
-  if (top[0] == bottom[0] && top[1] == bottom[1] && top[2] == bottom[2]){
+  if (topColor == findColor(bottom)){
     if (topColor == 30 ){//if it's black
     return esc + '[40m '+(doReset?reset:'');// black BG, then a space, then reset
     }
